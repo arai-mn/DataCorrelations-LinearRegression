@@ -1,15 +1,7 @@
-# Hi, this is a project on Python using matplotlib, pandas, and numpy 
+# Data Correlations and Linear Regression
 
-Please take a look below. 
-[Project 1](https://github.com/arai-mn/Jupyter-Python-projects/blob/main/MGOC15%20-%20Assignment%201.html)
-
-# Data Assignment 5 (8 Points)
-
-MGOC15 - Introductory Business Data Analytics
-
+**Course:** MGOC15 - Introductory Business Data Analytics<br>
 **Topics Tested:** Data Correlations, Linear Regressions <br>
-**Submission Format** Please submit your assignment as <i>MGOC15 Assignment 5 - Last Name, First Name.ipynb</i>.
-You may work in teams of two (or individually) but you must each submit your assignment separately and also mention your partner's name so that your work does not seem plagiarized.
 
 
 ### Housing Prices
