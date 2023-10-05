@@ -1,27 +1,82 @@
-# Data Correlations and Linear Regression
+# Housing Prices
 
-**Course:** MGOC15 - Introductory Business Data Analytics<br>
+**Course:** MGOC15 - Introductory Business Data Analytics <br>
 **Topics Tested:** Data Correlations, Linear Regressions <br>
 
+**Given Data:** 
+The data provides the sale prices of different homes in a small town in Iowa, USA. 
 
-### Housing Prices
+**Final objective** is to use linear regression to predict the house prices as accurately as possible, understanding what drives housing prices and how potential home owners value different features of a house.
 
-Accurately predicting housing prices is a billion dollar business, quite literally[1]. You have been given the sale prices of different homes in a small town in Iowa, USA. Our *final* objective is to use linear regression to predict the house prices as accurately as possible. We also need to understand what drives housing prices and how potential home owners value different features of a house.
+**The data contains the following variables:** <br>
 
-**Target/Outcome Field**: *SalePrice* <br>
-See the attached file "Data Description.txt" for a guide to the other variables.
+Id: Unique ID of property
+    
+Neighborhood: Physical locations within city
+    
+LotFrontage: Linear feet of street connected to property
+    
+Street: Type of road access to property
 
-<i> This assignment is worth 8 points</i>
+       Grvl	Gravel	
+       Pave	Paved
 
-**Competition: The top two teams with the best R-squared error will receive 0.5 bonus point. If more than two teams have the same (highest) R-squared error, then they will each receive +0.5 points** See bonus question at the very end.
+Total_sqr_footage: Total size of the house in square feet	
+    
+BldgType: Type of dwelling
+		
+       1Fam	Single-family Detached	
+       2FmCon	Two-family Conversion; originally built as one-family dwelling
+       Duplx	Duplex
+       TwnhsE	Townhouse End Unit
+       TwnhsI	Townhouse Inside Unit
+	
+OverallQual: Rates the overall material and finish of the house
 
-[1] https://www.kaggle.com/c/zillow-prize-1
+       10	Very Excellent
+       9	Excellent
+       8	Very Good
+       7	Good
+       6	Above Average
+       5	Average
+       4	Below Average
+       3	Fair
+       2	Poor
+       1	Very Poor
+	
+OverallCond: Rates the overall condition of the house
 
-## Partner: Magen Chen, 1005951043
+       10	Very Excellent
+       9	Excellent
+       8	Very Good
+       7	Good
+       6	Above Average	
+       5	Average
+       4	Below Average	
+       3	Fair
+       2	Poor
+       1	Very Poor
+		
+YearBuilt: Original construction date
 
-### Import all of the Modules used in Lecture 9
+BsmtFullBath: Basement full bathrooms
 
-Note that we need several additional modules for Linear regression.
+FullBath: Full bathrooms above grade
+
+HalfBath: Half baths above grade
+
+GarageCars: Size of garage in car capacity
+
+PoolArea: Pool area in square feet
+
+GrLivArea: Above grade (ground) living area square feet
+
+
+**Target/Outcome Variable**: *SalePrice* <br>
+
+### Importing modules and Data processing
+
+Before we start working with our data, we will do some standard procedures for data pre-processing. 
 
 
 ```python
@@ -365,16 +420,16 @@ df_housing.describe()
 
 
 
-### Q0: Data Inconsistencies [1 point]
+### Data Inconsistencies: dealing with outliers and missing data
 
-Please deal with outliers and missing data before proceeding with the following questions. It is enough to deal with outliers and missing data in the following columns only:
+We will deal with outliers and missing data in the following columns only:
 
 1. Total_sqr_footage
 2. OverallQual
 3. LotFrontage
 4. SalePrice
 
-Naturally, all subsequent analysis must be on the updated dataframe (without outliers or missing data in the above columns).
+Naturally, all subsequent analysis is on the updated dataframe (without outliers or missing data in the above columns).
 
 
 ```python
@@ -760,7 +815,7 @@ plt.title('Total_sqr_footage without Outliers')
 
 
     
-![png](/images/output_17_1.png)
+![png](output_16_1.png)
     
 
 
@@ -786,7 +841,7 @@ plt.title('OverallQual without Outliers')
 
 
     
-![png](/images/output_18_1.png)
+![png](output_17_1.png)
     
 
 
@@ -812,7 +867,7 @@ plt.title('LotFrontage without outliers')
 
 
     
-![png](/images/output_19_1.png)
+![png](output_18_1.png)
     
 
 
@@ -838,22 +893,17 @@ plt.title('SalePrice without outliers')
 
 
     
-![png](/images/output_20_1.png)
+![png](output_19_1.png)
     
 
 
-### Q1: Correlations [1.5 points]
+### Correlations
 
-Before we start predicting home prices, it's important that we understand how American homes have changed over the years and how these changes drive prices. With this in mind, use both statistical methods (correlational coefficients) and visualizations to answer the following questions.
+Before we start predicting home prices, it's important that we understand how American homes have changed over the years and how these changes drive prices. With this in mind, we use both statistical methods (correlational coefficients) and visualizations to answer the following questions.
 
-**Part a**: Although American families are shrinking [2], it is believed that homes have gotten bigger over the years. Support or refute this statement using the dataset (you do not need to show anything about shrinking family sizes).
+**Part a**: Although American families are shrinking [2], it is believed that homes have gotten bigger over the years. Support or refute this statement using the dataset.
 
 **Part b**: Let's talk home prices. What are home owners willing to pay more for - more living area (in square feet) or a better quality home? 
-
-    Hint for Part b: There is no need to draw ten box plots, one for each category. Use your discretion and draw 2 box plots that illustrate your point.
-
-
-[2] - https://www.pewresearch.org/social-trends/2015/12/17/1-the-american-family-today/
 
 
 ```python
@@ -872,7 +922,7 @@ plt.title('Mean Total_sqr_footage by Year')
 
 
     
-![png](/images/output_22_1.png)
+![png](output_21_1.png)
     
 
 
@@ -938,13 +988,13 @@ print(df_highQuality['SalePrice'].mean(), df_largeGrLivArea['SalePrice'].mean())
 
 
     
-![png](/images/output_27_1.png)
+![png](output_26_1.png)
     
 
 
 #Solution to part b: as it can be seen in the two box plots above, on average, people are willing to pay 298148 dollars for high quality homes, whereas they, on average, pay 251598 dollars for homes with large living area. Therefore, it can be concluded that people are willing to pay more for better quality. 
 
-### Q2: Feature Engineering [1 point]
+### Feature Engineering: modifying/transforming existing data
 
 Feature engineering is the process of creating new columns in a dataset by modifying or transforming existing data. These new columns are more amenable to linear regression. Based on this, let's answer the following question.
 
@@ -956,7 +1006,6 @@ Let us consider the building type column.
 
 **Part b**: There are multiple categories here, so we cannot simply convert this into a 0/1 column. Instead we will attempt something simpler. What do you think is the single building type that is most helpful in making a prediction? Let's call this T. Create a column called **IsT** that equals one if the building type is T and is zero otherwise.
 
-Note: T is a placeholder for the actual type that you nominate, i.e., at least one entry in the BldgType must be equal to this placeholder.
 
 #Solution to part a: Yes, including the building type would allow to increase the accuracy of predicting home prices. By including the Building type, we can examine how and to what extend the building type affects the home prices. 
 
@@ -1000,7 +1049,7 @@ df_final['Is1Fam'].value_counts()
 
 
 
-### Q3: Brute Force Linear Regression [1 point]
+### Q3: Brute Force Linear Regression
 
 It is natural to think that our linear regression must take into account every single feature in our dataset, right? After all, more data never hurt anybody.
 
@@ -1059,7 +1108,7 @@ print('r2_score: ', r2_score(Y_test, Y_predicted))
     r2_score:  0.8497175477958767
 
 
-### Question 4: Work Smart, Not Hard [1.5 points]
+### Improving the brute-force regression 
 
 You must have noticed by now that the brute-force regression has a reasonable R^2 error. How can we improve upon this? Is that even possible since we've already used all of the features up our sleeve?
 
@@ -1399,7 +1448,7 @@ print('r2_score: ', r2_score(Y_test, Y_predicted))
 
 What is important when it comes to building an accurate predictive model is not the number of features selected, but rather whether those features that are highly correlated with the target feature have been selected. This is because some features can be irrelevant and decrease the model's predictive accuracy.  
 
-### Question 5: Interpretation: [0.5 points]
+### Data analysis Interpretation
 
 Based on your analysis, what do you think are the most informative features (columns), i.e., what are potential buyers most influenced by when they buy a house? Name at least two features (and at most 4) for this answer.
 
@@ -1448,13 +1497,11 @@ print('r2_score: ', r2_score(Y_test, Y_predicted))
 
 Total_sqr_footage and OverallQual are the two most informative features. 
 
-### Question 6: Training Test Split [1.5 points]
+### Training Test Split 
 
 In all our experiments so far, we have used a 70:30 split for the training and test data. We need to verify if this 70:30 split is sacred or if other ratios are also okay. To answer this question, run the linear regression in Q2 again with a a) 50:50 split and b) 90:10 split. 
 
 What are the RMSE and R^2 error in both cases. Based on your experiments, can you conclude which of the three (50:50, 70:30, 90:10) is the best ratio for a training-test split. 
-
-**Hint**: You can adjust the ratio by altering the "test_size" parameter in train_test_split. Don't forget to include the random_state=0 part of your code so that I can verify the error. 
 
 
 
@@ -1549,7 +1596,7 @@ print('r2_score: ', r2_score(Y_test, Y_predicted))
 
 Based on this experiment, it looks like the 90:10 split produces the best r2_score. 
 
-### Bonus Question: Can you improve upon the R-squared? 
+### Improve upon the R-squared
 
 The two teams with the best R-squared errors (highest) will receive one bonus point each if they can improve upon the error in Q2/Q3. If more than two teams can beat the R^2 error, then they will all receive extra 0.5 points.
 
