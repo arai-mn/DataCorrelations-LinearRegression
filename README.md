@@ -815,7 +815,7 @@ plt.title('Total_sqr_footage without Outliers')
 
 
     
-![png](output_16_1.png)
+![png](/images/output_16_1.png)
     
 
 
@@ -841,7 +841,7 @@ plt.title('OverallQual without Outliers')
 
 
     
-![png](output_17_1.png)
+![png](/images/output_17_1.png)
     
 
 
@@ -867,7 +867,7 @@ plt.title('LotFrontage without outliers')
 
 
     
-![png](output_18_1.png)
+![png](/images/output_18_1.png)
     
 
 
@@ -893,7 +893,7 @@ plt.title('SalePrice without outliers')
 
 
     
-![png](output_19_1.png)
+![png](/images/output_19_1.png)
     
 
 
@@ -922,7 +922,7 @@ plt.title('Mean Total_sqr_footage by Year')
 
 
     
-![png](output_21_1.png)
+![png](/images/output_21_1.png)
     
 
 
@@ -988,7 +988,7 @@ print(df_highQuality['SalePrice'].mean(), df_largeGrLivArea['SalePrice'].mean())
 
 
     
-![png](output_26_1.png)
+![png](/images/output_26_1.png)
     
 
 
